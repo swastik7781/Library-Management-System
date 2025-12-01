@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Book | SiliconLib</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(20, 22, 31, 0.95);
+            border-right: 1px solid var(--border-light);
+            padding: 30px 20px;
+            position: fixed;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(112, 0, 255, 0.1);
+            color: var(--secondary);
+        }
+
+        .form-card {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            color: white;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .file-upload {
+            border: 2px dashed var(--border-light);
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(0, 242, 255, 0.05);
+        }
+
+        .form-actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <i class="fas fa-book-reader" style="color: var(--primary);"></i>
+                Silicon<span>Lib</span>
+            </a>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <span style="color: var(--text-muted);">Admin: Sribatsa</span>
+                <a href="index.html" class="btn btn-glow"
+                    style="padding: 8px 20px; font-size: 0.8rem; background: var(--secondary);">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="admin-dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="#" class="active"><i class="fas fa-plus-circle"></i> Add Books</a></li>
+                <li><a href="manage-students.html"><i class="fas fa-users"></i> Manage Students</a></li>
+                <li><a href="#"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <div class="form-card fade-in-up">
+                <h2 style="margin-bottom: 10px;">Add New Book</h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Enter the details of the new book to add to
+                    the library.</p>
+
+                <form>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label>Book Title</label>
+                            <input type="text" class="form-input" placeholder="Enter book title">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Author</label>
+                            <input type="text" class="form-input" placeholder="Author name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>ISBN Number</label>
+                            <input type="text" class="form-input" placeholder="ISBN-13">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select class="form-select">
+                                <option style="background: var(--bg-card);">Select Category</option>
+                                <option style="background: var(--bg-card);">Computer Science</option>
+                                <option style="background: var(--bg-card);">Mathematics</option>
+                                <option style="background: var(--bg-card);">Physics</option>
+                                <option style="background: var(--bg-card);">Literature</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Publication Year</label>
+                            <input type="number" class="form-input" placeholder="YYYY">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" class="form-input" placeholder="Number of copies">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Shelf Location</label>
+                            <input type="text" class="form-input" placeholder="e.g. A-12">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Book Cover Image</label>
+                            <div class="file-upload">
+                                <i class="fas fa-cloud-upload-alt"
+                                    style="font-size: 2rem; color: var(--text-muted); margin-bottom: 10px;"></i>
+                                <p style="color: var(--text-muted);">Drag & drop cover image here or click to upload</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn"
+                            style="border-color: var(--text-muted); color: var(--text-muted);"
+                            onclick="window.location.href='admin-dashboard.html'">Cancel</button>
+                        <button type="button" class="btn btn-glow">Add Book</button>
+                    </div>
+                </form>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+
+</html>

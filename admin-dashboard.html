@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | SiliconLib</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(2, 11, 20, 0.95);
+            border-right: 1px solid var(--border-light);
+            padding: 30px 20px;
+            position: fixed;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(112, 0, 255, 0.1);
+            color: var(--secondary);
+            box-shadow: 0 0 20px rgba(112, 0, 255, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .action-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <img src="https://silicon.edugrievance.com/assets/LMS/OSS/logo/20250110083807487.png" alt="Logo">
+            </a>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <span style="color: var(--text-muted);">Admin: Swastik</span>
+                <a href="index.html" class="btn btn-glow"
+                    style="padding: 8px 20px; font-size: 0.8rem; background: var(--secondary);">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="add-book.html"><i class="fas fa-plus-circle"></i> Add Books</a></li>
+                <li><a href="manage-students.html"><i class="fas fa-users"></i> Manage Students</a></li>
+                <li><a href="#"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h2 class="reveal" style="margin-bottom: 10px;">Admin Dashboard</h2>
+            <p class="reveal delay-1" style="color: var(--text-muted); margin-bottom: 40px;">Overview of library
+                performance and activities.</p>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid reveal delay-2">
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: var(--primary);">📚</div>
+                    <div>
+                        <h3 style="font-size: 1.8rem;">45,200</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Total Books</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: var(--secondary);">👥</div>
+                    <div>
+                        <h3 style="font-size: 1.8rem;">1,250</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Active Students</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: var(--accent);">⚠️</div>
+                    <div>
+                        <h3 style="font-size: 1.8rem;">15</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Overdue Returns</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <h3 class="reveal delay-3" style="margin-bottom: 20px;">Quick Actions</h3>
+            <div class="actions-grid reveal delay-3">
+                <div class="action-card">
+                    <i class="fas fa-book-medical"
+                        style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>Add New Book</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">Register new arrivals to the library
+                        database.</p>
+                    <a href="add-book.html" class="btn">Add Book</a>
+                </div>
+
+                <div class="action-card">
+                    <i class="fas fa-user-edit"
+                        style="font-size: 3rem; color: var(--secondary); margin-bottom: 20px;"></i>
+                    <h3>Manage Students</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">View student details, issue history, and
+                        fines.</p>
+                    <a href="manage-students.html" class="btn"
+                        style="border-color: var(--secondary); color: var(--secondary);">View Students</a>
+                </div>
+
+                <div class="action-card">
+                    <i class="fas fa-exchange-alt"
+                        style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+                    <h3>Issue / Return</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">Process book issues and returns for
+                        students.</p>
+                    <a href="#" class="btn" style="border-color: var(--accent); color: var(--accent);">Process</a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>

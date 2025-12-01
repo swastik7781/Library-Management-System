@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Students | SiliconLib</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(2, 11, 20, 0.95);
+            border-right: 1px solid var(--border-light);
+            padding: 30px 20px;
+            position: fixed;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(112, 0, 255, 0.1);
+            color: var(--secondary);
+            box-shadow: 0 0 20px rgba(112, 0, 255, 0.2);
+        }
+
+        .table-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .table-header {
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .search-box {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            border-radius: 50px;
+            width: 300px;
+            color: white;
+            outline: none;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-active {
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .status-blocked {
+            background: rgba(255, 0, 85, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .action-icon {
+            cursor: pointer;
+            margin-right: 15px;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .action-icon:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <img src="https://silicon.edugrievance.com/assets/LMS/OSS/logo/20250110083807487.png" alt="Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="books.html" class="nav-link">Library</a></li>
+                    <li><a href="student-login.html" class="nav-link">Student</a></li>
+                    <li><a href="admin-login.html" class="nav-link">Admin</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="student-login.html" class="btn btn-glow">Login Portal</a>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="admin-dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="add-book.html"><i class="fas fa-plus-circle"></i> Add Books</a></li>
+                <li><a href="#" class="active"><i class="fas fa-users"></i> Manage Students</a></li>
+                <li><a href="#"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <h2 class="reveal" style="margin-bottom: 30px;">Manage Students</h2>
+
+            <div class="table-card reveal delay-1">
+                <div class="table-header">
+                    <h3>Registered Students</h3>
+                    <input type="text" class="search-box" placeholder="Search by Name or SIC...">
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SIC Number</th>
+                            <th>Student Name</th>
+                            <th>Branch</th>
+                            <th>Year</th>
+                            <th>Books Issued</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>210123456</td>
+                            <td>Swastik Bhardwaj</td>
+                            <td>CSE</td>
+                            <td>3rd</td>
+                            <td>2</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <i class="fas fa-edit action-icon"></i>
+                                <i class="fas fa-trash-alt action-icon"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>210123457</td>
+                            <td>Sarmishtha Gain</td>
+                            <td>ECE</td>
+                            <td>2nd</td>
+                            <td>0</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <i class="fas fa-edit action-icon"></i>
+                                <i class="fas fa-trash-alt action-icon"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>210123458</td>
+                            <td>Sribatsa Patro</td>
+                            <td>MECH</td>
+                            <td>4th</td>
+                            <td>1</td>
+                            <td><span class="status-badge status-blocked">Blocked</span></td>
+                            <td>
+                                <i class="fas fa-edit action-icon"></i>
+                                <i class="fas fa-trash-alt action-icon"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>210123459</td>
+                            <td>Abhijeet Dash</td>
+                            <td>CSE</td>
+                            <td>1st</td>
+                            <td>3</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <i class="fas fa-edit action-icon"></i>
+                                <i class="fas fa-trash-alt action-icon"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>210123460</td>
+                            <td>Lipsa Bal</td>
+                            <td>CSE</td>
+                            <td>4th</td>
+                            <td>5</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <i class="fas fa-edit action-icon"></i>
+                                <i class="fas fa-trash-alt action-icon"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>

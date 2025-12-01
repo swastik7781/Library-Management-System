@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Books | SiliconLib</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .books-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .filter-sidebar {
+            width: 280px;
+            background: rgba(2, 11, 20, 0.95);
+            border-right: 1px solid var(--border-light);
+            padding: 30px 20px;
+            position: fixed;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .filter-group {
+            margin-bottom: 30px;
+        }
+
+        .filter-group h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .checkbox-item:hover {
+            color: white;
+        }
+
+        .checkbox-item input {
+            margin-right: 10px;
+            accent-color: var(--primary);
+        }
+
+        .books-main {
+            flex-grow: 1;
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        .search-bar {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px;
+            border-radius: 50px;
+            border: 1px solid var(--border-light);
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+
+        .search-input {
+            background: transparent;
+            border: none;
+            padding: 10px 20px;
+            flex-grow: 1;
+            color: white;
+            outline: none;
+        }
+
+        .search-btn {
+            background: var(--primary);
+            color: #000;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .book-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 157, 0.15);
+            border-color: var(--primary);
+        }
+
+        .book-cover {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .book-card:hover .book-cover img {
+            transform: scale(1.1);
+        }
+
+        .book-info {
+            padding: 20px;
+        }
+
+        .book-category {
+            font-size: 0.7rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .book-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .book-author {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .status-dot {
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .available {
+            background-color: #00e676;
+            box-shadow: 0 0 10px #00e676;
+        }
+
+        .unavailable {
+            background-color: #ff1744;
+            box-shadow: 0 0 10px #ff1744;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <img src="https://silicon.edugrievance.com/assets/LMS/OSS/logo/20250110083807487.png" alt="Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="books.html" class="nav-link active">Library</a></li>
+                    <li><a href="student-login.html" class="nav-link">Student</a></li>
+                    <li><a href="admin-login.html" class="nav-link">Admin</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="student-login.html" class="btn btn-glow">Login Portal</a>
+        </div>
+    </header>
+
+    <div class="books-container">
+        <!-- Filter Sidebar -->
+        <aside class="filter-sidebar">
+            <div class="filter-group">
+                <h4>Categories</h4>
+                <label class="checkbox-item"><input type="checkbox"> Computer Science</label>
+                <label class="checkbox-item"><input type="checkbox"> Mathematics</label>
+                <label class="checkbox-item"><input type="checkbox"> Physics</label>
+                <label class="checkbox-item"><input type="checkbox"> Literature</label>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="books-main">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2 class="reveal glitch" data-text="BROWSE COLLECTION">BROWSE COLLECTION</h2>
+                <div class="search-bar reveal">
+                    <input type="text" class="search-input" placeholder="Search by title, author, or ISBN...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="books-grid reveal delay-1">
+                <!-- Book 1 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Book Cover">
+                    </div>
+                    <div class="book-info">
+                        <div class="book-category">Computer Science</div>
+                        <h3 class="book-title"><a href="book-details.html">The Art of Coding</a></h3>
+                        <p class="book-author">By Alan Turing</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; color: var(--text-muted);"><span
+                                    class="status-dot available"></span> Available</span>
+                            <a href="book-details.html" class="btn"
+                                style="padding: 5px 15px; font-size: 0.7rem;">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 2 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Book Cover">
+                    </div>
+                    <div class="book-info">
+                        <div class="book-category">Business</div>
+                        <h3 class="book-title"><a href="book-details.html">Zero to One</a></h3>
+                        <p class="book-author">By Peter Thiel</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; color: var(--text-muted);"><span
+                                    class="status-dot available"></span> Available</span>
+                            <a href="book-details.html" class="btn"
+                                style="padding: 5px 15px; font-size: 0.7rem;">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>
