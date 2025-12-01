@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | SiliconLib</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(2, 11, 20, 0.95);
+            border-right: 1px solid var(--border-light);
+            padding: 30px 20px;
+            position: fixed;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .action-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
+        }
+
+        .book-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .book-item {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .book-item:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .book-cover {
+            width: 80px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .book-info {
+            flex-grow: 1;
+        }
+
+        .book-info h4 {
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .book-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+
+        .due-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .due-soon {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .due-ok {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+        }
+
+        .welcome-section {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border-light);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <img src="https://silicon.edugrievance.com/assets/LMS/OSS/logo/20250110083807487.png" alt="Logo">
+            </a>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <span style="color: var(--text-muted);">Student: Swastik Bhardwaj</span>
+                <a href="index.html" class="btn btn-glow"
+                    style="padding: 8px 20px; font-size: 0.8rem; background: var(--primary);">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="#my-books"><i class="fas fa-book-reader"></i> My Books</a></li>
+                <li><a href="books.html"><i class="fas fa-search"></i> Browse Library</a></li>
+                <li><a href="#"><i class="fas fa-history"></i> Borrow History</a></li>
+                <li><a href="#"><i class="fas fa-user-circle"></i> Profile</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Section -->
+            <div class="welcome-section reveal">
+                <h2 style="margin-bottom: 10px;">Welcome Back, Swastik! 👋</h2>
+                <p style="color: var(--text-muted);">SIC: 210123 | Branch: Computer Science & Engineering | Year: 3rd
+                </p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid reveal delay-1">
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: var(--primary);">📚</div>
+                    <div>
+                        <h3 style="font-size: 1.8rem;">3</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Books Borrowed</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: var(--accent);">⏰</div>
+                    <div>
+                        <h3 style="font-size: 1.8rem;">1</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Due Soon</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: var(--secondary);">💰</div>
+                    <div>
+                        <h3 style="font-size: 1.8rem;">₹0</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Pending Fines</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <h3 class="reveal delay-2" style="margin-bottom: 20px;">Quick Actions</h3>
+            <div class="actions-grid reveal delay-2">
+                <div class="action-card">
+                    <i class="fas fa-search-plus"
+                        style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>Browse Library</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">Explore our vast collection of books
+                        and resources.</p>
+                    <a href="books.html" class="btn">Browse Now</a>
+                </div>
+
+                <div class="action-card">
+                    <i class="fas fa-book-open"
+                        style="font-size: 3rem; color: var(--secondary); margin-bottom: 20px;"></i>
+                    <h3>My Borrowed Books</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">View all books currently borrowed and
+                        due dates.</p>
+                    <a href="#my-books" class="btn"
+                        style="border-color: var(--secondary); color: var(--secondary);">View Books</a>
+                </div>
+
+                <div class="action-card">
+                    <i class="fas fa-clock" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+                    <h3>Renew Books</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">Extend the due date for your borrowed
+                        books.</p>
+                    <a href="#" class="btn" style="border-color: var(--accent); color: var(--accent);">Renew</a>
+                </div>
+            </div>
+
+            <!-- Currently Borrowed Books -->
+            <h3 id="my-books" class="reveal delay-3" style="margin-bottom: 20px; margin-top: 40px;">Currently Borrowed
+                Books</h3>
+            <div class="book-list reveal delay-3">
+                <div class="book-item">
+                    <div class="book-cover">📖</div>
+                    <div class="book-info">
+                        <h4>Introduction to Algorithms</h4>
+                        <p>by Thomas H. Cormen, Charles E. Leiserson</p>
+                        <p><strong>Borrowed:</strong> Nov 15, 2025 | <strong>Due:</strong> Dec 15, 2025</p>
+                    </div>
+                    <span class="due-badge due-ok">14 days left</span>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-cover">💻</div>
+                    <div class="book-info">
+                        <h4>Clean Code: A Handbook of Agile Software Craftsmanship</h4>
+                        <p>by Robert C. Martin</p>
+                        <p><strong>Borrowed:</strong> Nov 20, 2025 | <strong>Due:</strong> Dec 5, 2025</p>
+                    </div>
+                    <span class="due-badge due-soon">4 days left</span>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-cover">🧠</div>
+                    <div class="book-info">
+                        <h4>Artificial Intelligence: A Modern Approach</h4>
+                        <p>by Stuart Russell, Peter Norvig</p>
+                        <p><strong>Borrowed:</strong> Nov 10, 2025 | <strong>Due:</strong> Dec 10, 2025</p>
+                    </div>
+                    <span class="due-badge due-ok">9 days left</span>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>
