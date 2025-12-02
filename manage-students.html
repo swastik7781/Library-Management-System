@@ -112,6 +112,29 @@
             color: var(--primary);
             text-shadow: 0 0 10px var(--primary);
         }
+
+        /* Dues Badge Styles */
+        .dues-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .dues-none {
+            background: rgba(0, 230, 118, 0.2);
+            color: #00e676;
+        }
+
+        .dues-low {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .dues-high {
+            background: rgba(255, 82, 82, 0.2);
+            color: #ff5252;
+        }
     </style>
 </head>
 
@@ -139,7 +162,8 @@
                 <li><a href="add-book.html"><i class="fas fa-plus-circle"></i> Add Books</a></li>
                 <li><a href="#" class="active"><i class="fas fa-users"></i> Manage Students</a></li>
                 <li><a href="issue-return.html"><i class="fas fa-exchange-alt"></i> Issue/Return</a></li>
-                <li><a href="admin-announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a></li>            </ul>
+                <li><a href="admin-announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+            </ul>
         </aside>
 
         <!-- Main Content -->
@@ -161,6 +185,7 @@
                             <th>Branch</th>
                             <th>Year</th>
                             <th>Books Issued</th>
+                            <th>Pending Dues</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -172,10 +197,13 @@
                             <td>CSE</td>
                             <td>3rd</td>
                             <td>2</td>
+                            <td><span class="dues-badge dues-none">₹0</span></td>
                             <td><span class="status-badge status-active">Active</span></td>
                             <td>
-                                <i class="fas fa-edit action-icon"></i>
-                                <i class="fas fa-trash-alt action-icon"></i>
+                                <i class="fas fa-edit action-icon" title="Edit"></i>
+                                <i class="fas fa-ban action-icon" style="color: var(--accent);" title="Block Student"
+                                    onclick="toggleBlock(this, '23bcsf03')"></i>
+                                <i class="fas fa-trash-alt action-icon" title="Delete"></i>
                             </td>
                         </tr>
                         <tr>
@@ -184,10 +212,13 @@
                             <td>ECE</td>
                             <td>2nd</td>
                             <td>0</td>
+                            <td><span class="dues-badge dues-low">₹50</span></td>
                             <td><span class="status-badge status-active">Active</span></td>
                             <td>
-                                <i class="fas fa-edit action-icon"></i>
-                                <i class="fas fa-trash-alt action-icon"></i>
+                                <i class="fas fa-edit action-icon" title="Edit"></i>
+                                <i class="fas fa-ban action-icon" style="color: var(--accent);" title="Block Student"
+                                    onclick="toggleBlock(this, '210123457')"></i>
+                                <i class="fas fa-trash-alt action-icon" title="Delete"></i>
                             </td>
                         </tr>
                         <tr>
@@ -196,10 +227,13 @@
                             <td>MECH</td>
                             <td>4th</td>
                             <td>1</td>
+                            <td><span class="dues-badge dues-high">₹250</span></td>
                             <td><span class="status-badge status-blocked">Blocked</span></td>
                             <td>
-                                <i class="fas fa-edit action-icon"></i>
-                                <i class="fas fa-trash-alt action-icon"></i>
+                                <i class="fas fa-edit action-icon" title="Edit"></i>
+                                <i class="fas fa-check-circle action-icon" style="color: var(--primary);"
+                                    title="Unblock Student" onclick="toggleBlock(this, '210123458')"></i>
+                                <i class="fas fa-trash-alt action-icon" title="Delete"></i>
                             </td>
                         </tr>
                         <tr>
@@ -208,10 +242,13 @@
                             <td>CSE</td>
                             <td>1st</td>
                             <td>3</td>
+                            <td><span class="dues-badge dues-none">₹0</span></td>
                             <td><span class="status-badge status-active">Active</span></td>
                             <td>
-                                <i class="fas fa-edit action-icon"></i>
-                                <i class="fas fa-trash-alt action-icon"></i>
+                                <i class="fas fa-edit action-icon" title="Edit"></i>
+                                <i class="fas fa-ban action-icon" style="color: var(--accent);" title="Block Student"
+                                    onclick="toggleBlock(this, '210123459')"></i>
+                                <i class="fas fa-trash-alt action-icon" title="Delete"></i>
                             </td>
                         </tr>
                         <tr>
@@ -220,10 +257,13 @@
                             <td>CSE</td>
                             <td>4th</td>
                             <td>5</td>
+                            <td><span class="dues-badge dues-none">₹0</span></td>
                             <td><span class="status-badge status-active">Active</span></td>
                             <td>
-                                <i class="fas fa-edit action-icon"></i>
-                                <i class="fas fa-trash-alt action-icon"></i>
+                                <i class="fas fa-edit action-icon" title="Edit"></i>
+                                <i class="fas fa-ban action-icon" style="color: var(--accent);" title="Block Student"
+                                    onclick="toggleBlock(this, '210123460')"></i>
+                                <i class="fas fa-trash-alt action-icon" title="Delete"></i>
                             </td>
                         </tr>
                     </tbody>
@@ -240,6 +280,44 @@
             });
         });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Toggle Block/Unblock Student
+        function toggleBlock(icon, sicNumber) {
+            const row = icon.closest('tr');
+            const statusBadge = row.querySelector('.status-badge');
+
+            if (statusBadge.classList.contains('status-active')) {
+                // Block student
+                if (confirm('Are you sure you want to block student ' + sicNumber + '?')) {
+                    statusBadge.classList.remove('status-active');
+                    statusBadge.classList.add('status-blocked');
+                    statusBadge.textContent = 'Blocked';
+
+                    // Change icon to unblock
+                    icon.classList.remove('fa-ban');
+                    icon.classList.add('fa-check-circle');
+                    icon.style.color = 'var(--primary)';
+                    icon.title = 'Unblock Student';
+
+                    alert('Student ' + sicNumber + ' has been blocked successfully!');
+                }
+            } else {
+                // Unblock student
+                if (confirm('Are you sure you want to unblock student ' + sicNumber + '?')) {
+                    statusBadge.classList.remove('status-blocked');
+                    statusBadge.classList.add('status-active');
+                    statusBadge.textContent = 'Active';
+
+                    // Change icon to block
+                    icon.classList.remove('fa-check-circle');
+                    icon.classList.add('fa-ban');
+                    icon.style.color = 'var(--accent)';
+                    icon.title = 'Block Student';
+
+                    alert('Student ' + sicNumber + ' has been unblocked successfully!');
+                }
+            }
+        }
     </script>
 
 </body>

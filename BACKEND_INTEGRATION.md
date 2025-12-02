@@ -166,15 +166,26 @@ Response: { success, message, bookId }
 
 ### 3. Manage Students (`manage-students.html`)
 **Features:**
-- View all students
+- View all students with pending dues
 - Search students
 - Add/Edit/Delete students
+- **Block/Unblock students** based on dues or violations
 - View student borrow history
+
+**Table Columns:**
+- SIC Number, Student Name, Branch, Year
+- Books Issued
+- **Pending Dues** (color-coded badges):
+  - 🟢 Green (₹0) - No dues
+  - 🟡 Yellow (₹1-₹100) - Low dues
+  - 🔴 Red (>₹100) - High dues
+- Status (Active/Blocked)
+- Actions (Edit, Block/Unblock, Delete)
 
 **API Endpoints Needed:**
 ```
 GET /api/admin/students
-Response: { students: [{ sic, name, branch, year, email, booksIssued }] }
+Response: { students: [{ sic, name, branch, year, email, booksIssued, pendingDues, status }] }
 
 POST /api/admin/students
 Request: { student details }
@@ -182,6 +193,10 @@ Response: { success, message }
 
 PUT /api/admin/students/:sic
 Request: { updated fields }
+Response: { success, message }
+
+PUT /api/admin/students/:sic/block
+Request: { blocked: true/false, reason: string }
 Response: { success, message }
 
 DELETE /api/admin/students/:sic

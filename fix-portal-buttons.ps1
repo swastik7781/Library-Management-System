@@ -1,0 +1,175 @@
+# Fix index.html portal buttons
+$file = "index.html"
+$content = Get-Content $file -Raw
+
+# Define the old content to replace
+$oldContent = @'
+            <div class="reveal delay-2" style="margin-top: 50px;">
+                <a href="books.html" class="btn btn-glow" style="margin-right: 20px;">Explore Shelves</a>
+                <a href="student-login.html" class="btn">Student Access</a>
+            </div>
+'@
+
+# Define the new portal buttons
+$newContent = @'
+            <!-- Animated Portal Buttons -->
+            <div class="portal-buttons reveal delay-2" style="display: flex; gap: 120px; justify-content: center; margin-top: 60px; padding: 30px;">
+                <a href="student-login.html" class="portal-btn">
+                    <div class="hexagon">
+                        <div class="hexagon-inner">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Student Access</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="admin-login.html" class="portal-btn">
+                    <div class="circle">
+                        <div class="circle-inner">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Admin Access</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <style>
+                .portal-buttons {
+                    display: flex;
+                    gap: 120px;
+                    justify-content: center;
+                    margin-top: 60px;
+                    padding: 30px;
+                }
+
+                .portal-btn {
+                    position: relative;
+                    text-decoration: none;
+                }
+
+                .hexagon {
+                    width: 180px;
+                    height: 200px;
+                    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+                    background: linear-gradient(135deg, var(--primary), var(--secondary));
+                    animation: hexRotate 8s ease-in-out infinite;
+                    box-shadow: 0 0 40px rgba(0, 255, 157, 0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .hexagon-inner {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 15px;
+                    animation: hexRotateReverse 8s ease-in-out infinite;
+                }
+
+                .hexagon-inner i {
+                    font-size: 3rem;
+                    color: #000;
+                }
+
+                .hexagon-inner span {
+                    font-family: 'Orbitron', sans-serif;
+                    font-weight: 700;
+                    font-size: 0.9rem;
+                    color: #000;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+
+                .circle {
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 50%;
+                    background: linear-gradient(135deg, var(--secondary), var(--accent));
+                    animation: circlePulse 3s ease-in-out infinite;
+                    box-shadow: 0 0 40px rgba(112, 0, 255, 0.5);
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .circle::before {
+                    content: '';
+                    position: absolute;
+                    width: 220px;
+                    height: 220px;
+                    border-radius: 50%;
+                    border: 2px solid var(--secondary);
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    animation: circleRipple 2s ease-out infinite;
+                }
+
+                .circle-inner {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 15px;
+                    z-index: 1;
+                }
+
+                .circle-inner i {
+                    font-size: 3rem;
+                    color: #000;
+                }
+
+                .circle-inner span {
+                    font-family: 'Orbitron', sans-serif;
+                    font-weight: 700;
+                    font-size: 0.9rem;
+                    color: #000;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+
+                @keyframes hexRotate {
+                    0%, 100% { transform: rotate(0deg); }
+                    50% { transform: rotate(360deg); }
+                }
+
+                @keyframes hexRotateReverse {
+                    0%, 100% { transform: rotate(0deg); }
+                    50% { transform: rotate(-360deg); }
+                }
+
+                @keyframes circlePulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                }
+
+                @keyframes circleRipple {
+                    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                    100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0; }
+                }
+
+                .portal-btn:hover .hexagon {
+                    animation-play-state: paused;
+                    box-shadow: 0 0 60px rgba(0, 255, 157, 0.8);
+                    transform: scale(1.05);
+                }
+
+                .portal-btn:hover .circle {
+                    animation-play-state: paused;
+                    box-shadow: 0 0 80px rgba(112, 0, 255, 1);
+                }
+            </style>
+'@
+
+# Replace the content
+$content = $content.Replace($oldContent, $newContent)
+
+# Save the file
+Set-Content $file $content -NoNewline
+
+Write-Host "✅ Successfully updated index.html with animated portal buttons!"
+Write-Host "   - Hexagon (Student): Rotating with counter-rotating text inside"
+Write-Host "   - Circle (Admin): Pulsing with ripple effect and text inside"
+Write-Host "   - Gap: 120px, Padding: 30px"
+Write-Host "   - No overflow issues!"
