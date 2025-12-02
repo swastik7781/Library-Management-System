@@ -58,34 +58,95 @@
             padding: 40px;
         }
 
-        .search-bar {
-            display: flex;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 5px;
-            border-radius: 50px;
-            border: 1px solid var(--border-light);
-            width: 100%;
-            max-width: 500px;
+        .search-bar-container {
             margin-bottom: 40px;
         }
 
-        .search-input {
+        .search-bar-enhanced {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px;
+            border-radius: 15px;
+            border: 2px solid var(--border-light);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            gap: 10px;
+        }
+
+        .search-bar-enhanced:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .search-icon {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-left: 15px;
+            opacity: 0.7;
+        }
+
+        .search-input-enhanced {
             background: transparent;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 15px;
             flex-grow: 1;
             color: white;
             outline: none;
+            font-size: 1rem;
+            font-family: 'Rajdhani', sans-serif;
         }
 
-        .search-btn {
+        .search-input-enhanced::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-filters {
+            border-left: 1px solid var(--border-light);
+            padding-left: 15px;
+        }
+
+        .search-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            outline: none;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .search-select:hover {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .search-select option {
+            background: #0a0e1a;
+            color: white;
+        }
+
+        .search-btn-enhanced {
             background: var(--primary);
             color: #000;
             border: none;
-            padding: 10px 30px;
-            border-radius: 50px;
-            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 700;
             cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .search-btn-enhanced:hover {
+            box-shadow: 0 0 20px var(--primary);
+            transform: translateY(-2px);
         }
 
         .books-grid {
@@ -182,38 +243,88 @@
             <a href="index.html" class="logo">
                 <img src="https://silicon.edugrievance.com/assets/LMS/OSS/logo/20250110083807487.png" alt="Logo">
             </a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="books.html" class="nav-link active">Library</a></li>
-                    <li><a href="student-login.html" class="nav-link">Student</a></li>
-                    <li><a href="admin-login.html" class="nav-link">Admin</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
-            <a href="student-login.html" class="btn btn-glow">Login Portal</a>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <a href="student-dashboard.html" class="btn"
+                    style="padding: 8px 20px; font-size: 0.8rem; border-color: var(--primary); color: var(--primary);">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+                <span style="color: var(--text-muted);">Student: Swastik Bhardwaj</span>
+                <a href="index.html" class="btn btn-glow"
+                    style="padding: 8px 20px; font-size: 0.8rem; background: var(--primary);">Logout</a>
+            </div>
         </div>
     </header>
 
     <div class="books-container">
         <!-- Filter Sidebar -->
         <aside class="filter-sidebar">
+            <h3 style="color: var(--primary); margin-bottom: 30px; font-size: 1.3rem;"><i class="fas fa-filter"></i>
+                Filters</h3>
+
             <div class="filter-group">
-                <h4>Categories</h4>
+                <h4><i class="fas fa-th-large"></i> Categories</h4>
                 <label class="checkbox-item"><input type="checkbox"> Computer Science</label>
                 <label class="checkbox-item"><input type="checkbox"> Mathematics</label>
                 <label class="checkbox-item"><input type="checkbox"> Physics</label>
                 <label class="checkbox-item"><input type="checkbox"> Literature</label>
+                <label class="checkbox-item"><input type="checkbox"> Business</label>
+                <label class="checkbox-item"><input type="checkbox"> Engineering</label>
             </div>
+
+            <div class="filter-group">
+                <h4><i class="fas fa-user-edit"></i> Authors</h4>
+                <label class="checkbox-item"><input type="checkbox"> Alan Turing</label>
+                <label class="checkbox-item"><input type="checkbox"> Peter Thiel</label>
+                <label class="checkbox-item"><input type="checkbox"> Thomas H. Cormen</label>
+                <label class="checkbox-item"><input type="checkbox"> Harper Lee</label>
+                <label class="checkbox-item"><input type="checkbox"> Stephen Hawking</label>
+                <label class="checkbox-item"><input type="checkbox"> Robert C. Martin</label>
+            </div>
+
+            <div class="filter-group">
+                <h4><i class="fas fa-graduation-cap"></i> Academic Level</h4>
+                <label class="checkbox-item"><input type="checkbox"> Undergraduate</label>
+                <label class="checkbox-item"><input type="checkbox"> Graduate</label>
+                <label class="checkbox-item"><input type="checkbox"> PhD/Research</label>
+                <label class="checkbox-item"><input type="checkbox"> General Reading</label>
+            </div>
+
+            <div class="filter-group">
+                <h4><i class="fas fa-check-circle"></i> Availability</h4>
+                <label class="checkbox-item"><input type="checkbox"> Available Now</label>
+                <label class="checkbox-item"><input type="checkbox"> Checked Out</label>
+                <label class="checkbox-item"><input type="checkbox"> Reserved</label>
+            </div>
+
+            <button class="btn" style="width: 100%; margin-top: 20px; background: var(--primary); color: black;">Apply
+                Filters</button>
+            <button class="btn"
+                style="width: 100%; margin-top: 10px; border-color: var(--secondary); color: var(--secondary);">Clear
+                All</button>
         </aside>
 
         <!-- Main Content -->
         <main class="books-main">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h2 class="reveal glitch" data-text="BROWSE COLLECTION">BROWSE COLLECTION</h2>
-                <div class="search-bar reveal">
-                    <input type="text" class="search-input" placeholder="Search by title, author, or ISBN...">
-                    <button class="search-btn"><i class="fas fa-search"></i></button>
+            <div style="margin-bottom: 40px;">
+                <h2 class="reveal glitch" data-text="BROWSE COLLECTION" style="margin-bottom: 30px;">BROWSE COLLECTION
+                </h2>
+
+                <!-- Enhanced Search Bar -->
+                <div class="search-bar-container reveal delay-1">
+                    <div class="search-bar-enhanced">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input-enhanced"
+                            placeholder="Search by title, author, ISBN, or keywords...">
+                        <div class="search-filters">
+                            <select class="search-select">
+                                <option>All Fields</option>
+                                <option>Title</option>
+                                <option>Author</option>
+                                <option>ISBN</option>
+                            </select>
+                        </div>
+                        <button class="search-btn-enhanced"><i class="fas fa-search"></i> Search</button>
+                    </div>
                 </div>
             </div>
 
@@ -247,6 +358,120 @@
                         <div class="book-category">Business</div>
                         <h3 class="book-title"><a href="book-details.html">Zero to One</a></h3>
                         <p class="book-author">By Peter Thiel</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; color: var(--text-muted);"><span
+                                    class="status-dot available"></span> Available</span>
+                            <a href="book-details.html" class="btn"
+                                style="padding: 5px 15px; font-size: 0.7rem;">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 3 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Book Cover">
+                    </div>
+                    <div class="book-info">
+                        <div class="book-category">Computer Science</div>
+                        <h3 class="book-title"><a href="book-details.html">Introduction to Algorithms</a></h3>
+                        <p class="book-author">By Thomas H. Cormen</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; color: var(--text-muted);"><span
+                                    class="status-dot available"></span> Available</span>
+                            <a href="book-details.html" class="btn"
+                                style="padding: 5px 15px; font-size: 0.7rem;">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 4 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Book Cover">
+                    </div>
+                    <div class="book-info">
+                        <div class="book-category">Literature</div>
+                        <h3 class="book-title"><a href="book-details.html">To Kill a Mockingbird</a></h3>
+                        <p class="book-author">By Harper Lee</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; color: var(--text-muted);"><span
+                                    class="status-dot unavailable"></span> Unavailable</span>
+                            <a href="book-details.html" class="btn"
+                                style="padding: 5px 15px; font-size: 0.7rem;">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 5 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Book Cover">
+                    </div>
+                    <div class="book-info">
+                        <div class="book-category">Mathematics</div>
+                        <h3 class="book-title"><a href="book-details.html">Calculus Made Easy</a></h3>
+                        <p class="book-author">By Silvanus P. Thompson</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; color: var(--text-muted);"><span
+                                    class="status-dot available"></span> Available</span>
+                            <a href="book-details.html" class="btn"
+                                style="padding: 5px 15px; font-size: 0.7rem;">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 6 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Book Cover">
+                    </div>
+                    <div class="book-info">
+                        <div class="book-category">Physics</div>
+                        <h3 class="book-title"><a href="book-details.html">A Brief History of Time</a></h3>
+                        <p class="book-author">By Stephen Hawking</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; color: var(--text-muted);"><span
+                                    class="status-dot available"></span> Available</span>
+                            <a href="book-details.html" class="btn"
+                                style="padding: 5px 15px; font-size: 0.7rem;">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 7 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Book Cover">
+                    </div>
+                    <div class="book-info">
+                        <div class="book-category">Computer Science</div>
+                        <h3 class="book-title"><a href="book-details.html">Clean Code</a></h3>
+                        <p class="book-author">By Robert C. Martin</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; color: var(--text-muted);"><span
+                                    class="status-dot available"></span> Available</span>
+                            <a href="book-details.html" class="btn"
+                                style="padding: 5px 15px; font-size: 0.7rem;">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 8 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Book Cover">
+                    </div>
+                    <div class="book-info">
+                        <div class="book-category">Computer Science</div>
+                        <h3 class="book-title"><a href="book-details.html">Data Structures & Algorithms</a></h3>
+                        <p class="book-author">By Narasimha Karumanchi</p>
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span style="font-size: 0.8rem; color: var(--text-muted);"><span
                                     class="status-dot available"></span> Available</span>

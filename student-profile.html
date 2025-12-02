@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Student Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(2, 11, 20, 0.95);
+            border-right: 1px solid var(--border-light);
+            padding: 30px 20px;
+            position: fixed;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(0, 255, 157, 0.1);
+            color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+        }
+
+        .profile-header {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--border-light);
+            margin-bottom: 30px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            flex-shrink: 0;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
+        }
+
+        .profile-info h2 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .profile-info p {
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .info-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 157, 0.15);
+        }
+
+        .info-card h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: white;
+            font-weight: 600;
+        }
+
+        .edit-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <img src="https://silicon.edugrievance.com/assets/LMS/OSS/logo/20250110083807487.png" alt="Logo">
+            </a>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <span style="color: var(--text-muted);">Student: Swastik Bhardwaj</span>
+                <a href="index.html" class="btn btn-glow"
+                    style="padding: 8px 20px; font-size: 0.8rem; background: var(--primary);">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="student-dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="student-dashboard.html#my-books"><i class="fas fa-book-reader"></i> My Books</a></li>
+                <li><a href="books.html"><i class="fas fa-search"></i> Browse Library</a></li>
+                <li><a href="student-dashboard.html#my-books"><i class="fas fa-history"></i> Borrow History</a></li>
+                <li><a href="#" class="active"><i class="fas fa-user-circle"></i> Profile</a></li>
+                <li><a href="student-announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a></li>            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Profile Header -->
+            <div class="profile-header reveal">
+                <div class="profile-photo">👤</div>
+                <div class="profile-info">
+                    <h2>Swastik Bhardwaj</h2>
+                    <p><i class="fas fa-id-card"></i> SIC: 23bcsf03</p>
+                    <p><i class="fas fa-graduation-cap"></i> Computer Science & Engineering</p>
+                    <p><i class="fas fa-calendar"></i> Year: 3rd | Semester: 6th</p>
+                </div>
+            </div>
+
+            <h3 class="reveal delay-1" style="margin-bottom: 20px;">Personal Information</h3>
+            <div class="info-grid reveal delay-1">
+                <div class="info-card">
+                    <h4><i class="fas fa-user"></i> Basic Details</h4>
+                    <div class="info-row">
+                        <span class="info-label">Full Name</span>
+                        <span class="info-value">Swastik Bhardwaj</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">SIC Number</span>
+                        <span class="info-value">23bcsf03</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Date of Birth</span>
+                        <span class="info-value">15 Jan 2003</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Gender</span>
+                        <span class="info-value">Male</span>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h4><i class="fas fa-book"></i> Academic Details</h4>
+                    <div class="info-row">
+                        <span class="info-label">Branch</span>
+                        <span class="info-value">CSE</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Year</span>
+                        <span class="info-value">3rd Year</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Semester</span>
+                        <span class="info-value">6th</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">CGPA</span>
+                        <span class="info-value">8.5</span>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h4><i class="fas fa-envelope"></i> Contact Information</h4>
+                    <div class="info-row">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">swastik@silicon.ac.in</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Phone</span>
+                        <span class="info-value">+91 98765 43210</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Address</span>
+                        <span class="info-value">Bhubaneswar, Odisha</span>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h4><i class="fas fa-book-reader"></i> Library Statistics</h4>
+                    <div class="info-row">
+                        <span class="info-label">Books Borrowed</span>
+                        <span class="info-value">3</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Total Books Read</span>
+                        <span class="info-value">27</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Pending Fines</span>
+                        <span class="info-value">₹0</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Member Since</span>
+                        <span class="info-value">Aug 2023</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-glow edit-btn reveal delay-2">
+                <i class="fas fa-edit"></i> Edit Profile
+            </button>
+        </main>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>
+
+

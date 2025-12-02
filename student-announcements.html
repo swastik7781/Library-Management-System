@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements | Student Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(2, 11, 20, 0.95);
+            border-right: 1px solid var(--border-light);
+            padding: 30px 20px;
+            position: fixed;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(112, 0, 255, 0.1);
+            color: var(--secondary);
+            box-shadow: 0 0 20px rgba(112, 0, 255, 0.2);
+        }
+
+        .announcements-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .announcement-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--border-light);
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .announcement-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .announcement-date {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .announcement-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .announcement-content {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .new-badge {
+            background: var(--primary);
+            color: black;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <img src="https://silicon.edugrievance.com/assets/LMS/OSS/logo/20250110083807487.png" alt="Logo">
+            </a>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <span style="color: var(--text-muted);">Student: Swastik Bhardwaj</span>
+                <a href="index.html" class="btn btn-glow"
+                    style="padding: 8px 20px; font-size: 0.8rem; background: var(--secondary);">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="student-dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="student-dashboard.html#my-books"><i class="fas fa-book-reader"></i> My Books</a></li>
+                <li><a href="books.html"><i class="fas fa-search"></i> Browse Library</a></li>
+                <li><a href="student-dashboard.html#my-books"><i class="fas fa-history"></i> Borrow History</a></li>
+                <li><a href="student-profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+                <li><a href="student-announcements.html" class="active"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h2 class="reveal" style="margin-bottom: 10px;">Library Announcements</h2>
+            <p class="reveal delay-1" style="color: var(--text-muted); margin-bottom: 40px;">Stay updated with the
+                latest news and information from the library.</p>
+
+            <!-- Announcements List -->
+            <div class="announcements-list reveal delay-2">
+                <!-- Announcement 1 -->
+                <div class="announcement-card">
+                    <div class="announcement-header">
+                        <span class="announcement-date"><i class="fas fa-calendar"></i> January 15, 2025</span>
+                        <span class="new-badge">New</span>
+                    </div>
+                    <h4 class="announcement-title">Library Timings Extended</h4>
+                    <p class="announcement-content">
+                        The library will now be open from 8:00 AM to 10:00 PM on weekdays to accommodate students
+                        during exam season. Please make use of the extended hours for your studies.
+                    </p>
+                </div>
+
+                <!-- Announcement 2 -->
+                <div class="announcement-card">
+                    <div class="announcement-header">
+                        <span class="announcement-date"><i class="fas fa-calendar"></i> January 10, 2025</span>
+                        <span class="new-badge">New</span>
+                    </div>
+                    <h4 class="announcement-title">New Books Arrival</h4>
+                    <p class="announcement-content">
+                        We have received 500+ new books covering Computer Science, Mathematics, and Engineering topics.
+                        Visit the library to explore the latest collection.
+                    </p>
+                </div>
+
+                <!-- Announcement 3 -->
+                <div class="announcement-card">
+                    <div class="announcement-header">
+                        <span class="announcement-date"><i class="fas fa-calendar"></i> January 5, 2025</span>
+                    </div>
+                    <h4 class="announcement-title">Overdue Book Fine Waiver</h4>
+                    <p class="announcement-content">
+                        All overdue fines will be waived for students who return their books by January 20, 2025. This
+                        is a one-time opportunity to clear your dues without penalty.
+                    </p>
+                </div>
+
+                <!-- Announcement 4 -->
+                <div class="announcement-card">
+                    <div class="announcement-header">
+                        <span class="announcement-date"><i class="fas fa-calendar"></i> December 28, 2024</span>
+                    </div>
+                    <h4 class="announcement-title">Digital Library Access</h4>
+                    <p class="announcement-content">
+                        Students can now access e-books and research papers through our new digital library portal.
+                        Login credentials have been sent to your registered email addresses.
+                    </p>
+                </div>
+
+                <!-- Announcement 5 -->
+                <div class="announcement-card">
+                    <div class="announcement-header">
+                        <span class="announcement-date"><i class="fas fa-calendar"></i> December 20, 2024</span>
+                    </div>
+                    <h4 class="announcement-title">Winter Break Schedule</h4>
+                    <p class="announcement-content">
+                        The library will operate with reduced hours (9:00 AM - 5:00 PM) during the winter break from
+                        December 24 to January 2. Regular hours will resume from January 3, 2025.
+                    </p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>

@@ -16,7 +16,7 @@
 
         .sidebar {
             width: 280px;
-            background: rgba(20, 22, 31, 0.95);
+            background: rgba(2, 11, 20, 0.95);
             border-right: 1px solid var(--border-light);
             padding: 30px 20px;
             position: fixed;
@@ -42,12 +42,15 @@
             border-radius: 10px;
             color: var(--text-muted);
             transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
         }
 
         .sidebar-menu a:hover,
         .sidebar-menu a.active {
             background: rgba(112, 0, 255, 0.1);
             color: var(--secondary);
+            box-shadow: 0 0 20px rgba(112, 0, 255, 0.2);
         }
 
         .form-card {
@@ -57,6 +60,18 @@
             border: 1px solid var(--border-light);
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
         }
 
         .form-grid {
@@ -78,6 +93,8 @@
             margin-bottom: 10px;
             color: var(--text-muted);
             font-size: 0.9rem;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
         }
 
         .form-input,
@@ -89,12 +106,15 @@
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-light);
             color: white;
+            font-family: 'Rajdhani', sans-serif;
+            transition: 0.3s;
         }
 
         .form-input:focus,
         .form-select:focus {
             border-color: var(--primary);
             outline: none;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
         }
 
         .file-upload {
@@ -109,7 +129,7 @@
 
         .file-upload:hover {
             border-color: var(--primary);
-            background: rgba(0, 242, 255, 0.05);
+            background: rgba(0, 255, 157, 0.05);
         }
 
         .form-actions {
@@ -127,11 +147,10 @@
     <header>
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">
-                <i class="fas fa-book-reader" style="color: var(--primary);"></i>
-                Silicon<span>Lib</span>
+                <img src="https://silicon.edugrievance.com/assets/LMS/OSS/logo/20250110083807487.png" alt="Logo">
             </a>
             <div style="display: flex; align-items: center; gap: 20px;">
-                <span style="color: var(--text-muted);">Admin: Sribatsa</span>
+                <span style="color: var(--text-muted);">Admin: Swastik</span>
                 <a href="index.html" class="btn btn-glow"
                     style="padding: 8px 20px; font-size: 0.8rem; background: var(--secondary);">Logout</a>
             </div>
@@ -145,15 +164,14 @@
                 <li><a href="admin-dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
                 <li><a href="#" class="active"><i class="fas fa-plus-circle"></i> Add Books</a></li>
                 <li><a href="manage-students.html"><i class="fas fa-users"></i> Manage Students</a></li>
-                <li><a href="#"><i class="fas fa-bullhorn"></i> Announcements</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-            </ul>
+                <li><a href="issue-return.html"><i class="fas fa-exchange-alt"></i> Issue/Return</a></li>
+                <li><a href="admin-announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a></li>            </ul>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
 
-            <div class="form-card fade-in-up">
+            <div class="form-card reveal">
                 <h2 style="margin-bottom: 10px;">Add New Book</h2>
                 <p style="color: var(--text-muted); margin-bottom: 30px;">Enter the details of the new book to add to
                     the library.</p>
@@ -222,6 +240,15 @@
 
         </main>
     </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 
 </body>
 

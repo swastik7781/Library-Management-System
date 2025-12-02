@@ -217,6 +217,44 @@ header {
     width: 100%;
 }
 
+/* Navbar Center Branding */
+.nav-center-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    pointer-events: none;
+}
+
+.nav-brand-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    background: var(--gradient-glow);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 4s linear infinite;
+    text-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+}
+
+.nav-book-icon {
+    font-size: 1.5rem;
+    color: var(--primary);
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px var(--primary));
+}
+
+.nav-book-icon:nth-child(3) {
+    animation-delay: 1s;
+    color: var(--secondary);
+    filter: drop-shadow(0 0 8px var(--secondary));
+}
+
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
