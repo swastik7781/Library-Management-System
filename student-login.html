@@ -90,18 +90,20 @@
             <a href="index.html" class="logo">
                 <img src="https://silicon.edugrievance.com/assets/LMS/OSS/logo/20250110083807487.png" alt="Logo">
             </a>
-                        <div class="nav-center-brand">
+            <div class="nav-center-brand">
                 <i class="fas fa-book-open nav-book-icon"></i>
                 <span class="nav-brand-text">SILICON LIBRARY</span>
                 <i class="fas fa-book nav-book-icon"></i>
             </div></a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html" class="nav-link">Home</a></li>                    <li><a href="student-login.html" class="nav-link active">Student</a></li>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="student-login.html" class="nav-link active">Student</a></li>
                     <li><a href="admin-login.html" class="nav-link">Admin</a></li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
-            </nav>        </div>
+            </nav>
+        </div>
     </header>
 
     <section class="login-section">
@@ -115,15 +117,16 @@
                 <p style="color: var(--text-muted);">Access your library account</p>
             </div>
 
-            <form action="student-dashboard.html">
+            <form id="studentLoginForm" onsubmit="return validateStudentLogin(event)">
                 <div class="form-group">
                     <label style="display: block; margin-bottom: 10px; color: var(--text-muted);">SIC Number</label>
-                    <input type="text" class="form-input" placeholder="Enter your SIC (e.g. 210123)" required>
+                    <input type="text" id="sicNumber" class="form-input" placeholder="Enter your SIC (e.g. 23bcsf03)"
+                        required>
                 </div>
 
                 <div class="form-group">
                     <label style="display: block; margin-bottom: 10px; color: var(--text-muted);">Password</label>
-                    <input type="password" class="form-input" placeholder="••••••••" required>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••" required>
                 </div>
 
                 <div style="display: flex; justify-content: space-between; margin-bottom: 30px; font-size: 0.9rem;">
@@ -132,6 +135,9 @@
                     </label>
                     <a href="#" style="color: var(--primary);">Forgot Password?</a>
                 </div>
+
+                <div id="errorMessage"
+                    style="color: var(--accent); margin-bottom: 15px; display: none; text-align: center;"></div>
 
                 <button type="submit" class="btn btn-glow login-btn">Login to Dashboard</button>
             </form>
@@ -153,9 +159,40 @@
             });
         });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Student Login Validation
+        function validateStudentLogin(event) {
+            event.preventDefault();
+
+            const sicNumber = document.getElementById('sicNumber').value.trim();
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Valid credentials
+            const validSIC = '23bcsf03';
+            const validPassword = '1234';
+
+            if (sicNumber === validSIC && password === validPassword) {
+                // Success - redirect to dashboard
+                window.location.href = 'student-dashboard.html';
+                return false;
+            } else {
+                // Show error message
+                errorMessage.textContent = '❌ Invalid SIC Number or Password!';
+                errorMessage.style.display = 'block';
+
+                // Shake animation
+                const form = document.getElementById('studentLoginForm');
+                form.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    form.style.animation = '';
+                }, 500);
+
+                return false;
+            }
+        }
     </script>
 
 </body>
 
 </html>
-

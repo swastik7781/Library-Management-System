@@ -99,18 +99,20 @@
             <a href="index.html" class="logo">
                 <img src="https://silicon.edugrievance.com/assets/LMS/OSS/logo/20250110083807487.png" alt="Logo">
             </a>
-                        <div class="nav-center-brand">
+            <div class="nav-center-brand">
                 <i class="fas fa-book-open nav-book-icon"></i>
                 <span class="nav-brand-text">SILICON LIBRARY</span>
                 <i class="fas fa-book nav-book-icon"></i>
             </div></a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html" class="nav-link">Home</a></li>                    <li><a href="student-login.html" class="nav-link">Student</a></li>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="student-login.html" class="nav-link">Student</a></li>
                     <li><a href="admin-login.html" class="nav-link active">Admin</a></li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
-            </nav>        </div>
+            </nav>
+        </div>
     </header>
 
     <section class="login-section">
@@ -124,16 +126,19 @@
                 <p style="color: var(--text-muted);">Restricted Access Only</p>
             </div>
 
-            <form action="admin-dashboard.html">
+            <form id="adminLoginForm" onsubmit="return validateAdminLogin(event)">
                 <div class="form-group">
                     <label style="display: block; margin-bottom: 10px; color: var(--text-muted);">Admin ID</label>
-                    <input type="text" class="form-input" placeholder="Enter Admin ID" required>
+                    <input type="text" id="adminId" class="form-input" placeholder="Enter Admin ID" required>
                 </div>
 
                 <div class="form-group">
                     <label style="display: block; margin-bottom: 10px; color: var(--text-muted);">Password</label>
-                    <input type="password" class="form-input" placeholder="••••••••" required>
+                    <input type="password" id="adminPassword" class="form-input" placeholder="••••••••" required>
                 </div>
+
+                <div id="adminErrorMessage"
+                    style="color: var(--accent); margin-bottom: 15px; display: none; text-align: center;"></div>
 
                 <button type="submit" class="btn login-btn">Secure Login</button>
             </form>
@@ -155,9 +160,40 @@
             });
         });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Admin Login Validation
+        function validateAdminLogin(event) {
+            event.preventDefault();
+
+            const adminId = document.getElementById('adminId').value.trim();
+            const password = document.getElementById('adminPassword').value;
+            const errorMessage = document.getElementById('adminErrorMessage');
+
+            // Valid credentials
+            const validAdminId = 'admin001';
+            const validPassword = '1234';
+
+            if (adminId === validAdminId && password === validPassword) {
+                // Success - redirect to dashboard
+                window.location.href = 'admin-dashboard.html';
+                return false;
+            } else {
+                // Show error message
+                errorMessage.textContent = '❌ Invalid Admin ID or Password!';
+                errorMessage.style.display = 'block';
+
+                // Shake animation
+                const form = document.getElementById('adminLoginForm');
+                form.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    form.style.animation = '';
+                }, 500);
+
+                return false;
+            }
+        }
     </script>
 
 </body>
 
 </html>
-
